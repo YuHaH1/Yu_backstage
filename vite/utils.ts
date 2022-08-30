@@ -1,9 +1,10 @@
 import _ from 'lodash'
-export function parseEnv(env: Record<string, any>) {
-    const envs = _.cloneDeep(env)
-    Object.entries(env).forEach(([key, value]) => {
-        if (/^\d+$/.test(value)) {
-            envs[key] = parseInt(value)
+export function parseEnv(): envTypes {
+    const envs: any = _.cloneDeep(import.meta.env)
+    Object.entries(envs).forEach(([key, value ]) => {
+
+        if (/^\d+$/.test(value as string)) {
+            envs[key] = parseInt(value as string)
         }
         if (value === 'true' || value === 'false') {
             envs[key] = value === 'true' ? true : false

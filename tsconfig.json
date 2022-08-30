@@ -22,7 +22,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "vite/**/*.ts",
-    "mock/**/*.ts"
+    "mock/**/*.ts",
+    "globalTypes/**/*.ts",
+    "globalTypes/**/*.d.ts",
   ],
   "references": [
     {

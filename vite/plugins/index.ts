@@ -4,8 +4,9 @@
 import vue from '@vitejs/plugin-vue'
 import { Plugin } from 'vite'
 import registersMockjs  from './mock/index'
-export default function registerPlugins(isBuild: boolean, env: Record<string, any>) {
-    const pluginsArray:Plugin[] = []
+export default function registerPlugins(isBuild: boolean, env: envTypes) {
+    const pluginsArray: Plugin[] = []
+    
     pluginsArray.push(vue())
     pluginsArray.push(registersMockjs(isBuild))
     return pluginsArray

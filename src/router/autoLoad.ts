@@ -3,13 +3,13 @@ import { RouteRecordRaw } from "vue-router"
 interface IModule {
     [key: string]: any
 }
-
 const layout = import.meta.glob('../layout/*.vue', {//vite 2.0提供的动态导入文件 导入布局页面的路由
     eager: true
 }),
     views = import.meta.glob('../views/**/*.vue', {//两个*代表递归子目录寻找.vue文件
         eager: true
     }),//
+    view = import.meta.glob('../views/*.vue',{eager:true}),
     routes = [] as RouteRecordRaw[],
 
     getRouteByModule = (filePath: string, module: { [key: string]: any }, child: boolean = false) => {
@@ -44,10 +44,14 @@ const layout = import.meta.glob('../layout/*.vue', {//vite 2.0提供的动态导
             }
         })
         return child_routes
+    },
+    getViewFirstRoute = () => {
+        const routes = [] as RouteRecordRaw[]
+        Object.entries(view).forEach(([path, module]) => {
+            if(path.includes('home'))return
+            const route = getRouteByModule(path, module as {[key:string]:any})
+            routes.push(route)
+        })
+        return Array.from(new Set(routes))
     }
-
-
-
-
-
-export default getRoutes()
+export default [...getRoutes(),...getViewFirstRoute()]

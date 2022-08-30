@@ -12,6 +12,6 @@
 </script>
 
 
-<style lang='sass' scoped>
+<style lang='scss' scoped>
  
 </style>
